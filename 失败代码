@@ -1,0 +1,26 @@
+
+try {
+            HashMap map = new HashMap();
+            map.put("app_code","jIaHewXD");
+            ArrayList list = new ArrayList();
+            HashMap map1 = new HashMap();
+            map1.put("role","user");
+            map1.put("content","你好");
+            list.add(map1);
+            map.put("messages",list);
+            OkHttpClient client = new OkHttpClient();
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType,"{\n  \"app_code\": \"\n" +
+                    "jIaHewXD\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"你好\"\n    }\n  ]\n}");
+            Request request = new Request.Builder()
+                    .url("http://localhost/sendmessage")
+                    .post(body)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", "Bearer undefined")
+                    .build();
+            Response response = client.newCall(request).execute();
+            log.info(response.message());
+        } catch (IOException e) {
+            log.info(e.toString());
+            throw new RuntimeException(e);
+        }
